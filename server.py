@@ -1,4 +1,4 @@
-import sys
+import time
 import grpc
 from concurrent import futures
 from proto import embedding_pb2 as embedding_pb2
