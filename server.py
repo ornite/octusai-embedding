@@ -66,7 +66,7 @@ class EmbeddingService(embedding_pb2_grpc.EmbeddingServiceServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     embedding_pb2_grpc.add_EmbeddingServiceServicer_to_server(EmbeddingService(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:50052')
     server.start()
     print("Server started.")
     
