@@ -15,12 +15,12 @@ class EmbeddingServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetImageEmbedding = channel.unary_unary(
-                '/EmbeddingService/GetImageEmbedding',
+                '/proto.EmbeddingService/GetImageEmbedding',
                 request_serializer=embedding__pb2.ImageRequest.SerializeToString,
                 response_deserializer=embedding__pb2.EmbeddingResponse.FromString,
                 )
         self.GetTextEmbedding = channel.unary_unary(
-                '/EmbeddingService/GetTextEmbedding',
+                '/proto.EmbeddingService/GetTextEmbedding',
                 request_serializer=embedding__pb2.TextRequest.SerializeToString,
                 response_deserializer=embedding__pb2.EmbeddingResponse.FromString,
                 )
@@ -56,7 +56,7 @@ def add_EmbeddingServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'EmbeddingService', rpc_method_handlers)
+            'proto.EmbeddingService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -75,7 +75,7 @@ class EmbeddingService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/EmbeddingService/GetImageEmbedding',
+        return grpc.experimental.unary_unary(request, target, '/proto.EmbeddingService/GetImageEmbedding',
             embedding__pb2.ImageRequest.SerializeToString,
             embedding__pb2.EmbeddingResponse.FromString,
             options, channel_credentials,
@@ -92,7 +92,7 @@ class EmbeddingService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/EmbeddingService/GetTextEmbedding',
+        return grpc.experimental.unary_unary(request, target, '/proto.EmbeddingService/GetTextEmbedding',
             embedding__pb2.TextRequest.SerializeToString,
             embedding__pb2.EmbeddingResponse.FromString,
             options, channel_credentials,

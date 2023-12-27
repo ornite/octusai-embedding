@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package proto;
+
 service EmbeddingService {
   rpc GetImageEmbedding (ImageRequest) returns (EmbeddingResponse);
   rpc GetTextEmbedding (TextRequest) returns (EmbeddingResponse);
