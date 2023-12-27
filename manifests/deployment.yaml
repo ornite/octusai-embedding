@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: embedding
+spec:
+  selector:
+    matchLabels:
+      app: embedding
+  template:
+    metadata:
+      labels:
+        app: embedding
+    spec:
+      containers:
+        - name: embedding
+          image: ornite/octusai-embedding:latest
+          resources:
+            limits:
+              memory: "10Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 50052
