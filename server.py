@@ -1,3 +1,4 @@
+import logging
 import time
 import grpc
 from concurrent import futures
@@ -64,16 +65,18 @@ class EmbeddingService(embedding_pb2_grpc.EmbeddingServiceServicer):
         context.abort(code, details)
 
 def serve():
+    logging.basicConfig(level=logging.DEBUG)
+                        
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     embedding_pb2_grpc.add_EmbeddingServiceServicer_to_server(EmbeddingService(), server)
     server.add_insecure_port('[::]:50052')
     server.start()
-    print("Server started.")
+    logging.info("Server started.")
     
     try:
         server.wait_for_termination()
     except KeyboardInterrupt:
-        print("Server stopped by user.")
+        logging.info("Server stopped by user.")
 
 if __name__ == '__main__':
     serve()
