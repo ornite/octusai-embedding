@@ -16,7 +16,8 @@ spec:
           image: ornite/octusai-embedding:latest
           resources:
             limits:
-              memory: "10Gi"
-              cpu: "500m"
+              cpu: "1"
+              memory: "8Gi"
+              nvidia.com/gpu: 1
           ports:
             - containerPort: 50052

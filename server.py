@@ -5,6 +5,7 @@ from concurrent import futures
 from proto import embedding_pb2 as embedding_pb2
 from proto import embedding_pb2_grpc as embedding_pb2_grpc
 from src.model.model import EmbeddingModel
+import torch
 
 class EmbeddingService(embedding_pb2_grpc.EmbeddingServiceServicer):
     def __init__(self):
@@ -72,6 +73,7 @@ def serve():
     server.add_insecure_port('[::]:50052')
     server.start()
     logging.info("Server started.")
+    logging.info(f"Device: {'cuda' if torch.cuda.is_available() else 'cpu'}")
     
     try:
         server.wait_for_termination()
